@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api.gearstore", "api.gearstore\api.gearstore.csproj", "{C8BFB971-2EEC-4BFC-B4C5-646FC61DB472}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "api.gearstore.controller", "api.gearstore\api.gearstore.controller.csproj", "{C8BFB971-2EEC-4BFC-B4C5-646FC61DB472}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "api.gearstore.logic", "api.gearstore.logic\api.gearstore.logic.csproj", "{F9DCAC19-BBA3-4957-887B-D18FEC6AF9D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{C8BFB971-2EEC-4BFC-B4C5-646FC61DB472}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8BFB971-2EEC-4BFC-B4C5-646FC61DB472}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8BFB971-2EEC-4BFC-B4C5-646FC61DB472}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9DCAC19-BBA3-4957-887B-D18FEC6AF9D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9DCAC19-BBA3-4957-887B-D18FEC6AF9D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9DCAC19-BBA3-4957-887B-D18FEC6AF9D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9DCAC19-BBA3-4957-887B-D18FEC6AF9D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
