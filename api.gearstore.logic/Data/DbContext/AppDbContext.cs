@@ -10,6 +10,7 @@ namespace api.gearstore.logic.Data.DbContext
 {
     public class AppDbContext : Microsoft.EntityFrameworkCore.DbContext
     {
+        public DbSet<LotData> Lots { get; set; }
         public DbSet<UserData> Users { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
