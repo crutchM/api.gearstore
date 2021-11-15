@@ -13,7 +13,7 @@ namespace api.gearstore.logic.Data.Repositories
         LotData GetById(long id);
         IEnumerable<LotData> GetByOwnerId(long ownerId);
         bool Create(LotData lot);
-        void Update(LotData lot);
+        bool Update(long id);
         LotData DeleteById(long id);
         bool Clean();
     }

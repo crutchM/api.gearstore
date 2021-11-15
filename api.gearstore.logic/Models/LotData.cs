@@ -30,6 +30,11 @@ namespace api.gearstore.logic.Models
             Description = description;
         }
 
+        public bool IsClosed()
+        {
+            return DateClosed is not null;
+        }
+
         public void CloseLot()
         {
             DateClosed = DateTime.Now;

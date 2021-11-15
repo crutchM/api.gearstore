@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace api.gearstore.logic.Data.Repositories
 {
-    class LotReposytoryImpl : ILotsRepository
+    public class LotReposytoryImpl : ILotsRepository
     {
         private readonly AppDbContext _context;
 
@@ -57,13 +57,17 @@ namespace api.gearstore.logic.Data.Repositories
             return _context.Lots.Where(x => x.OwnerId == ownerId);
         }
 
-        public void Update(LotData lot)
+        public bool Update(long id)
         {
-            var oldLot = GetById(lot.Id);
-            oldLot.Copy(lot);
-
+            var oldLot = GetById(id);
+            if (oldLot.IsClosed())
+            {
+                return false;
+            }
+            oldLot.CloseLot();
             _context.Lots.Update(oldLot);
             _context.SaveChanges();
+            return true;
         }
     }
 }

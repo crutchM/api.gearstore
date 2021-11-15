@@ -35,9 +35,9 @@ namespace api.gearstore.controller.Controllers
         }
 
         [HttpPut]
-        public void CloseLot(LotData lot)
+        public JsonResult CloseLot(long id)
         {
-             _lotsRepository.Update(lot);
+            return BoolResultJson(_lotsRepository.Update(id));
         }
 
 

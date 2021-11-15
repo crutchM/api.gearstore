@@ -32,6 +32,8 @@ namespace api.gearstore
                 options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"])
             );
             services.AddScoped<IUserRepository, UserRepositoryImpl>();
+            services.AddScoped<ILotsRepository, LotReposytoryImpl>();
+            
 
             // CORS
             services.AddCors(c =>
