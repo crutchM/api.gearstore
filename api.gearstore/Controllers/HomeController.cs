@@ -1,13 +1,9 @@
-﻿using api.gearstore.Models;
+﻿using System.Diagnostics;
+using api.gearstore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace api.gearstore.Controllers
+namespace api.gearstore.controller.Controllers
 {
     public class HomeController : Controller
     {
