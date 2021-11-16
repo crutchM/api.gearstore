@@ -9,6 +9,7 @@ namespace api.gearstore.logic.Models
     public class LotData
     {
         public long Id { get; set; }
+
         public long OwnerId { get; set; }
 
         public DateTime DateOpened { get; set; }
@@ -18,13 +19,14 @@ namespace api.gearstore.logic.Models
         public double Price { get; set; }
 
         public string Description { get; set; }
-        //мейби стоит сделать еще статус заказа, но с другой стороны если у нас есть dateClosed, то казалось бы и не надо
+
+        public LotData() {}
 
         public LotData(long id, long ownerID, DateTime opened, DateTime closed, double price, string description)
         {
             Id = id;
             OwnerId = ownerID;
-            DateOpened = opened;
+            DateOpened = DateTime.Now;
             DateClosed = null;
             Price = price;
             Description = description;
@@ -39,14 +41,11 @@ namespace api.gearstore.logic.Models
         {
             DateClosed = DateTime.Now;
         }
-        public LotData() { }
 
         public void Copy(LotData lot)
         {
             Price = lot.Price;
             Description = lot.Description;
         }
-        
-
     }
 }
