@@ -6,13 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Newtonsoft.Json.Serialization;
 
-namespace api.gearstore
+namespace api.gearstore.controller
 {
     public class Startup
     {
@@ -32,6 +28,7 @@ namespace api.gearstore
                 options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"])
             );
             services.AddScoped<IUserRepository, UserRepositoryImpl>();
+            services.AddSingleton(Configuration);
 
             // CORS
             services.AddCors(c =>
