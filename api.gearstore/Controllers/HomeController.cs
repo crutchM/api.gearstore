@@ -1,7 +1,7 @@
-﻿using System.Diagnostics;
-using api.gearstore.Models;
+﻿using api.gearstore.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics;
 
 namespace api.gearstore.controller.Controllers
 {
@@ -12,6 +12,7 @@ namespace api.gearstore.controller.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            _logger.LogDebug("Home controller has been initialized");
         }
 
         public IActionResult Index()
