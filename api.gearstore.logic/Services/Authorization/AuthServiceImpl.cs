@@ -21,9 +21,7 @@ namespace api.gearstore.logic.Services.Authorization
             return LoginResult.Success;
         }
 
-        public void LogOut(string sessionId)
-        {
-            
-        }
+        public void LogOut(string sessionId) => 
+            _repository.Clean(sessionId);
     }
 }
