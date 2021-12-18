@@ -10,8 +10,6 @@
         
         public UserData FoundUser { get; set; }
 
-        public UserLoginData() {}
-
         public UserLoginData(string inputUsername, string inputPassword, string sessionId, UserData foundUser)
         {
             InputUsername = inputUsername;

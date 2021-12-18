@@ -1,8 +1,11 @@
 using api.gearstore.logic.Data.DbContext;
 using api.gearstore.logic.Data.Repositories;
 using api.gearstore.logic.Data.Repositories.Lots;
+using api.gearstore.logic.Data.Repositories.Sessions;
 using api.gearstore.logic.Data.Repositories.Users;
 using api.gearstore.logic.Services;
+using api.gearstore.logic.Services.Authorization;
+using api.gearstore.logic.Services.Registration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -32,7 +35,9 @@ namespace api.gearstore.controller
             );
             services.AddScoped<IUserRepository, UserRepositoryImpl>();
             services.AddScoped<ILotsRepository, LotRepositoryImpl>();
+            services.AddScoped<ISessionRepository, SessionRepositoryImpl>();
             services.AddScoped<IRegistrationService, RegistrationService>();
+            services.AddScoped<IAuthService, AuthServiceImpl>();
 
             // CORS
             services.AddCors(c =>

@@ -2,6 +2,7 @@
 using api.gearstore.controller.Models.JsonObjects;
 using api.gearstore.logic.Models.Enums;
 using api.gearstore.logic.Services;
+using api.gearstore.logic.Services.Registration;
 using Microsoft.AspNetCore.Mvc;
 
 namespace api.gearstore.controller.Controllers

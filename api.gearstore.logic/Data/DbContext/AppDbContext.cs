@@ -9,6 +9,7 @@ namespace api.gearstore.logic.Data.DbContext
         
         public DbSet<CharData> Chars { get; set; }
         public DbSet<LotData> Lots { get; set; }
+        public DbSet<SessionData> Sessions { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) => 
             Database.EnsureCreated();
