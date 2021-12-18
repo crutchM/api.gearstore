@@ -1,7 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-
-namespace api.gearstore.logic.Models
+﻿namespace api.gearstore.logic.Models
 {
     public class UserData
     {
@@ -10,12 +7,18 @@ namespace api.gearstore.logic.Models
         public string Username { get; set; }
 
         public string Password { get; set;}
+        
+        public string Email { get; set; }
+        
+        public string Phone { get; set; }
 
-        public UserData(long id, string username, string password)
+        public UserData(long id, string username, string password, string email, string phone)
         {
             Id = id;
             Username = username;
             Password = password;
+            Email = email;
+            Phone = phone;
         }
 
         public UserData() { }
@@ -34,6 +37,8 @@ namespace api.gearstore.logic.Models
         {
             Username = user.Username;
             Password = user.Password;
+            Email = user.Email;
+            Phone = user.Phone;
         }
     }
 }
