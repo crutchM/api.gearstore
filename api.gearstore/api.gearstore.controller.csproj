@@ -13,8 +13,4 @@
     <ProjectReference Include="..\api.gearstore.logic\api.gearstore.logic.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Converters" />
-  </ItemGroup>
-
 </Project>

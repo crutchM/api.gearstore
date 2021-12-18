@@ -1,5 +1,4 @@
-﻿using api.gearstore.controller.Converters;
-using api.gearstore.logic.Models;
+﻿using api.gearstore.logic.Models;
 using Newtonsoft.Json;
 
 namespace api.gearstore.controller.Models.JsonObjects
