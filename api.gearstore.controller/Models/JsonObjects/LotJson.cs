@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace api.gearstore.controller.Models.JsonObjects
 {
     [JsonObject]
-    public class LotJson : IJsonRepresentation<Tuple<LotData, UserData, CharData, bool>>
+    public class LotJson : IJsonRepresentation<(LotData, bool)>
     {
         [JsonProperty("lotId")]
         public long Id { get; set; }
@@ -46,24 +46,21 @@ namespace api.gearstore.controller.Models.JsonObjects
         [JsonProperty("isFavorite")]
         public bool IsFavorite { get; set; }
 
-        public Tuple<LotData, UserData, CharData, bool> ToImage() =>
-            (
-                new LotData(
-                    id: Id,
-                    ownerId: -1,
-                    opened: new DateTime(DateOpened),
-                    closed: null,
-                    price: Price,
-                    description: Description
-                ),
-                new UserData(
+        public (LotData, bool) ToImage() =>
+        (
+            new LotData(
+                id: Id,
+                owner: new UserData(
                     id: -1,
                     username: null,
                     password: null,
                     email: Email,
                     phone: Phone
                 ),
-                new CharData(
+                opened: new DateTime(DateOpened),
+                closed: null,
+                price: Price,
+                character: new CharData(
                     id: -1,
                     level: Level,
                     server: Server,
@@ -72,25 +69,26 @@ namespace api.gearstore.controller.Models.JsonObjects
                     heaven: Heaven,
                     doll: Doll,
                     description: Description
-                ),
-                IsFavorite
-            ).ToTuple();
+                )
+            ),
+            IsFavorite
+        );
 
-        public void Represent(Tuple<LotData, UserData, CharData, bool> image)
+        public void Represent((LotData, bool) image)
         {
-            var (lot, user, character, isFav) = image;
+            var (lot, isFav) = image;
             Id = lot.Id;
-            Server = character.Server;
-            Race = character.Race;
-            Phone = user.Phone;
-            Email = user.Email;
-            Class = character.Class;
-            Heaven = character.Heaven;
-            Doll = character.Doll;
-            Level = character.Level;
+            Server = lot.Character.Server;
+            Race = lot.Character.Race;
+            Phone = lot.Owner.Phone;
+            Email = lot.Owner.Email;
+            Class = lot.Character.Class;
+            Heaven = lot.Character.Heaven;
+            Doll = lot.Character.Doll;
+            Level = lot.Character.Level;
             DateOpened = lot.DateOpened.Ticks;
             Price = (int)lot.Price;
-            Description = lot.Description;
+            Description = lot.Character.Description;
             IsFavorite = isFav;
         }
     }

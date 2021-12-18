@@ -1,11 +1,7 @@
-﻿using api.gearstore.logic.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using api.gearstore.logic.Models;
 
-namespace api.gearstore.logic.Data.Repositories
+namespace api.gearstore.logic.Data.Repositories.Lots
 {
     public interface ILotsRepository
     {

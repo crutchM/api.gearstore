@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using api.gearstore.logic.Data.Repositories.Users;
 using Microsoft.Extensions.Logging;
 
 namespace api.gearstore.controller.Controllers

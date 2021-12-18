@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using api.gearstore.logic.Models;
 using api.gearstore.logic.Data.DbContext;
+using api.gearstore.logic.Models;
 
-namespace api.gearstore.logic.Data.Repositories
+namespace api.gearstore.logic.Data.Repositories.Users
 {
     public class UserRepositoryImpl : IUserRepository
     {

@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 namespace api.gearstore.controller.Models.JsonObjects
 {
     [JsonObject]
-    public class LotPreviewJson : IJsonRepresentation<Tuple<LotData, CharData>>
+    public class LotPreviewJson : IJsonRepresentation<LotData>
     {
         [JsonProperty("server")]
         public string Server { get; set; }
@@ -19,17 +19,14 @@ namespace api.gearstore.controller.Models.JsonObjects
         [JsonProperty("lvl")]
         public int Level { get; set; }
 
-        public Tuple<LotData, CharData> ToImage() =>
-            (
-                new LotData(
-                    id: -1,
-                    ownerId: -1,
-                    opened: new DateTime(0),
-                    closed: null,
-                    price: Price,
-                    description: null
-                ), 
-                new CharData(
+        public LotData ToImage() =>
+            new LotData(
+                id: -1,
+                owner: null,
+                opened: new DateTime(0),
+                closed: null,
+                price: Price,
+                character: new CharData(
                     id: -1,
                     level: Level,
                     server: Server,
@@ -39,15 +36,14 @@ namespace api.gearstore.controller.Models.JsonObjects
                     doll: null,
                     description: null
                 )
-            ).ToTuple();
+            );
 
-        public void Represent(Tuple<LotData, CharData> image)
+        public void Represent(LotData image)
         {
-            var (lot, character) = image;
-            Price = (int)lot.Price;
-            Level = character.Level;
-            Server = character.Server;
-            Race = character.Race;
+            Price = (int)image.Price;
+            Level = image.Character.Level;
+            Server = image.Character.Server;
+            Race = image.Character.Race;
         }
     }
 }

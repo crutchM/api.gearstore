@@ -6,26 +6,26 @@ namespace api.gearstore.logic.Models
     {
         public long Id { get; set; }
 
-        public long OwnerId { get; set; }
+        public UserData Owner { get; set; }
 
         public DateTime DateOpened { get; set; }
 
         public DateTime? DateClosed { get; set; }
 
         public double Price { get; set; }
-
-        public string Description { get; set; }
+        
+        public CharData Character { get; set; }
 
         public LotData() {}
 
-        public LotData(long id, long ownerId, DateTime opened, DateTime? closed, double price, string description)
+        public LotData(long id, UserData owner, DateTime opened, DateTime? closed, double price, CharData character)
         {
             Id = id;
-            OwnerId = ownerId;
+            Owner = owner;
             DateOpened = DateTime.Now;
             DateClosed = null;
             Price = price;
-            Description = description;
+            Character = character;
         }
 
         public bool IsClosed() => 

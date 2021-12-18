@@ -1,21 +1,17 @@
-﻿using api.gearstore.logic.Data.DbContext;
-using api.gearstore.logic.Models;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using api.gearstore.logic.Data.DbContext;
+using api.gearstore.logic.Models;
 
-namespace api.gearstore.logic.Data.Repositories
+namespace api.gearstore.logic.Data.Repositories.Lots
 {
-    public class LotReposytoryImpl : ILotsRepository
+    public class LotRepositoryImpl : ILotsRepository
     {
         private readonly AppDbContext _context;
 
-        public LotReposytoryImpl(AppDbContext context)
-        {
+        public LotRepositoryImpl(AppDbContext context) => 
             _context = context;
-        }
+
         public bool Clean()
         {
             _context.Lots.RemoveRange(_context.Lots);
@@ -42,19 +38,15 @@ namespace api.gearstore.logic.Data.Repositories
             return lot;
         }
 
-        public IEnumerable<LotData> GetAll()
-        {
-            return _context.Lots;
-        }
+        public IEnumerable<LotData> GetAll() => 
+            _context.Lots;
 
-        public LotData GetById(long id)
-        {
-            return _context.Lots.Find(id);
-        }
+        public LotData GetById(long id) => 
+            _context.Lots.Find(id);
 
         public IEnumerable<LotData> GetByOwnerId(long ownerId)
         {
-            return _context.Lots.Where(x => x.OwnerId == ownerId);
+            return _context.Lots.Where(x => x.Owner.Id == ownerId);
         }
 
         public bool Update(long id)

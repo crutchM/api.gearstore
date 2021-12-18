@@ -1,5 +1,7 @@
 using api.gearstore.logic.Data.DbContext;
 using api.gearstore.logic.Data.Repositories;
+using api.gearstore.logic.Data.Repositories.Lots;
+using api.gearstore.logic.Data.Repositories.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -24,10 +26,11 @@ namespace api.gearstore.controller
             // DI
             services.AddControllersWithViews();
             services.AddDbContext<AppDbContext>(options => 
-                options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"])
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"),
+                    b => b.MigrationsAssembly("api.gearstore.controller"))
             );
             services.AddScoped<IUserRepository, UserRepositoryImpl>();
-            services.AddScoped<ILotsRepository, LotReposytoryImpl>();
+            services.AddScoped<ILotsRepository, LotRepositoryImpl>();
             
 
             // CORS
