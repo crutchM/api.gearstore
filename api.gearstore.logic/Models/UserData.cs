@@ -1,7 +1,12 @@
-﻿namespace api.gearstore.logic.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace api.gearstore.logic.Models
 {
     public class UserData
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
 
         public string Username { get; set; }
@@ -12,25 +17,12 @@
         
         public string Phone { get; set; }
 
-        public UserData(long id, string username, string password, string email, string phone)
+        public UserData(string username, string password, string email, string phone)
         {
-            Id = id;
             Username = username;
             Password = password;
             Email = email;
             Phone = phone;
-        }
-
-        public UserData() { }
-
-        public static UserData GetDummyInstance()
-        {
-            return new UserData
-            {
-                Id = -1,
-                Username = "Username",
-                Password = "Password"
-            };
         }
 
         public void CopyFrom(UserData user)

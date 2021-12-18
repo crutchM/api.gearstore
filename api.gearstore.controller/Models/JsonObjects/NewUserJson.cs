@@ -26,7 +26,6 @@ namespace api.gearstore.controller.Models.JsonObjects
         {
             return (
                 new UserData(
-                    id: -1,
                     username: Username,
                     password: Password,
                     email: Email,

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using api.gearstore.logic.Data.DbContext;
 using api.gearstore.logic.Models;
@@ -23,10 +24,9 @@ namespace api.gearstore.logic.Data.Repositories.Users
 
         public bool Create(UserData user)
         {
-            Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<UserData> resultState = 
-                _context.Users.Add(user);
+            _context.Users.Add(user);
             _context.SaveChanges();
-            return resultState.State == Microsoft.EntityFrameworkCore.EntityState.Unchanged;
+            return true;
         }
 
         public UserData DeleteById(long id)

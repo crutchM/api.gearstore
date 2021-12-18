@@ -51,7 +51,6 @@ namespace api.gearstore.controller.Models.JsonObjects
             new LotData(
                 id: Id,
                 owner: new UserData(
-                    id: -1,
                     username: null,
                     password: null,
                     email: Email,
