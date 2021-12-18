@@ -11,12 +11,15 @@ namespace api.gearstore.logic.Models
         
         public string SessionId { get; set; }
         
+        public long UserId { get; set; }
+        
+        [ForeignKey("UserId")]
         public UserData User { get; set; }
 
-        public SessionData(string sessionId, UserData user) : this(sessionId) => 
-            User = user;
-
-        private SessionData(string sessionId) => 
+        public SessionData(string sessionId, long userId)
+        {
             SessionId = sessionId;
+            UserId = userId;
+        }
     }
 }

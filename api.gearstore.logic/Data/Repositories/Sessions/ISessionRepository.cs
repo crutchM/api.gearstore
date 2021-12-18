@@ -11,5 +11,7 @@ namespace api.gearstore.logic.Data.Repositories.Sessions
         void Clean(string sessionId);
 
         UserData GetUserByLogin(string login);
+
+        SessionData GetIfExists(string sessionId);
     }
 }

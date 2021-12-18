@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using api.gearstore.logic.Data.DbContext;
 using api.gearstore.logic.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace api.gearstore.logic.Data.Repositories.Sessions
 {
@@ -28,5 +29,9 @@ namespace api.gearstore.logic.Data.Repositories.Sessions
 
         public UserData GetUserByLogin(string login) => 
             _context.Users.FirstOrDefault(u => u.Username == login);
+
+        public SessionData GetIfExists(string sessionId) => 
+            _context.Sessions.Include(s => s.User).ToList()
+                .FirstOrDefault(s => s.SessionId == sessionId);
     }
 }

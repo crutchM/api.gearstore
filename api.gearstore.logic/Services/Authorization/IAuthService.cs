@@ -8,5 +8,7 @@ namespace api.gearstore.logic.Services.Authorization
         LoginResult LogIn(UserLoginData loginData);
 
         void LogOut(string sessionId);
+
+        SessionData GetIfRegistered(string sessionId);
     }
 }
