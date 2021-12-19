@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using api.gearstore.controller.Models.JsonObjects;
+using api.gearstore.logic.Data.Repositories.Favourites;
 using api.gearstore.logic.Data.Repositories.Lots;
 using api.gearstore.logic.Data.Repositories.Sessions;
 using api.gearstore.logic.Models;
@@ -15,24 +16,30 @@ namespace api.gearstore.controller.Controllers
     {
         private readonly ILotsRepository _lotRepository;
         private readonly ISessionRepository _sessionRepository;
+        private readonly IFavouritesRepository _favouritesRepository;
 
-        public FiltrationController(ILotsRepository lotRepository, ISessionRepository sessionRepository)
-        {
+        public FiltrationController(
+            ILotsRepository lotRepository, 
+            ISessionRepository sessionRepository, 
+            IFavouritesRepository favouritesRepository
+        ) {
             _lotRepository = lotRepository;
             _sessionRepository = sessionRepository;
+            _favouritesRepository = favouritesRepository;
         }
 
         [HttpGet]
         public JsonResult GetFilteredLots(FiltrationJson json)
         {
+            var userId = _sessionRepository.GetIfExists(json.SessionId)?.UserId ?? -1;
             var result = json.Type switch
             {
                 "all" =>
                     _lotRepository.GetAll().Where(l => !l.IsClosed()),
                 "own" =>
-                    _lotRepository.GetByOwnerId(_sessionRepository.GetIfExists(json.SessionId).UserId),
+                    _lotRepository.GetByOwnerId(userId) ?? Enumerable.Empty<LotData>().AsQueryable(),
                 "fav" =>
-                    Enumerable.Empty<LotData>().AsQueryable(), // finish after API-13,
+                    _favouritesRepository.GetUsersFavourites(userId) ?? Enumerable.Empty<LotData>().AsQueryable(),
                 _ =>
                     Enumerable.Empty<LotData>().AsQueryable()
             };
@@ -40,24 +47,30 @@ namespace api.gearstore.controller.Controllers
             return new JsonResult(Filter(result, json));
         }
 
-        private IEnumerable<LotJson> Filter(IQueryable<LotData> lots, FiltrationJson json) =>
-            lots.Where(  // by server and race
+        private IEnumerable<LotJson> Filter(IQueryable<LotData> lots, FiltrationJson json)
+        {
+            var userId = _sessionRepository.GetIfExists(json.SessionId)?.UserId ?? -1;
+            return lots.Where( // by server and race
                 lot =>
                     (json.Race == null || json.Race == lot.Character.Race) &&
                     (json.Server == null || lot.Character.Server == json.Server)
-            ).Where(  // by level
+            ).Where( // by level
                 lot =>
                     (json.MinLvl == null || lot.Character.Level >= json.MinLvl) &&
                     (json.MaxLvl == null || lot.Character.Level <= json.MaxLvl)
-            ).Where(  // by price
+            ).Where( // by price
                 lot =>
                     (json.MinPrice == null || lot.Price >= json.MinPrice) &&
                     (json.MaxPrice == null || lot.Price <= json.MaxPrice)
-            ).Select(  // transform
+            ).Select( // transform
                 lot => new LotJson().WithLoadedRepresentation(Tuple.Create(
                     lot,
-                    false  // finish after API-13
+                    _favouritesRepository.IsFav(
+                        userId,
+                        lot.Id
+                    )
                 ).ToValueTuple())
             );
+        }
     }
 }

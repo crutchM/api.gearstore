@@ -35,10 +35,10 @@ namespace api.gearstore.controller.Controllers
             if (session is null)
                 return new JsonResult(new List<LotData>());
             _logger.LogDebug("Requesting for getting all favs for one user");
-            var lots = _favourites.GetUsersFavourites(session.User.Id).Select(f => f.Lot);
+            var lots = _favourites.GetUsersFavourites(session.User.Id);
             return new JsonResult(
-                lots.ToList().Select(
-                    l => new LotJson().WithLoadedRepresentation((l, true))
+                lots.Select(
+                    l => new LotJson().WithLoadedRepresentation(Tuple.Create(l, true).ToValueTuple())
                 )
             );
         }

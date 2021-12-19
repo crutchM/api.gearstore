@@ -12,11 +12,15 @@ namespace api.gearstore.logic.Data.Repositories.Favourites
 
         public FavouritesRepositoryImpl(AppDbContext context) =>
             _context = context;
-        
-        public IQueryable<FavouritesData> GetUsersFavourites(long userId) => 
+
+        public bool IsFav(long userId, long lotId) => 
+            GetUsersFavourites(userId).Any(lot => lot.Id == lotId);
+
+        public IQueryable<LotData> GetUsersFavourites(long userId) => 
             _context.Favourites.Where(x => x.UserId == userId)
                 .Include(x => x.User)
-                .Include(x => x.Lot);
+                .Include(x => x.Lot)
+                .Select(f => f.Lot);
 
         public void Create(long lotId, long userId)
         {
