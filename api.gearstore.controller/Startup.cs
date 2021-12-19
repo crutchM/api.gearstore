@@ -1,10 +1,9 @@
 using api.gearstore.logic.Data.DbContext;
-using api.gearstore.logic.Data.Repositories;
+using api.gearstore.logic.Data.Repositories.Favourites;
 using api.gearstore.logic.Data.Repositories.Chars;
 using api.gearstore.logic.Data.Repositories.Lots;
 using api.gearstore.logic.Data.Repositories.Sessions;
 using api.gearstore.logic.Data.Repositories.Users;
-using api.gearstore.logic.Services;
 using api.gearstore.logic.Services.Authorization;
 using api.gearstore.logic.Services.NewLot;
 using api.gearstore.logic.Services.Registration;
@@ -40,7 +39,7 @@ namespace api.gearstore.controller
             services.AddScoped<ISessionRepository, SessionRepositoryImpl>();
             services.AddScoped<IRegistrationService, RegistrationService>();
             services.AddScoped<IAuthService, AuthServiceImpl>();
-            services.AddScoped<IFavouritesRepository, FavoutitesRepositoryImpl>();
+            services.AddScoped<IFavouritesRepository, FavouritesRepositoryImpl>();
 
             // CORS
             services.AddCors(c =>

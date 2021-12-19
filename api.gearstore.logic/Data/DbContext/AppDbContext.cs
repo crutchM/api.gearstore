@@ -1,5 +1,4 @@
 ﻿using api.gearstore.logic.Models;
-using api.gearstore.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace api.gearstore.logic.Data.DbContext
