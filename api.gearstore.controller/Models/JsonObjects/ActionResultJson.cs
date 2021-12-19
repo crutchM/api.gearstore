@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 namespace api.gearstore.controller.Models.JsonObjects
 {
     [JsonObject]
-    public class AuthResultJson : IJsonRepresentation<Tuple<bool, string>>
+    public class ActionResultJson : IJsonRepresentation<(bool, string)>
     {
         [JsonProperty("success")]
         public bool IsSuccessful { get; set; }
@@ -12,10 +12,10 @@ namespace api.gearstore.controller.Models.JsonObjects
         [JsonProperty("errorMessage")]
         public string ErrorMessage { get; set; }
 
-        public Tuple<bool, string> ToImage() => 
-            (IsSuccessful, ErrorMessage).ToTuple();
+        public (bool, string) ToImage() => 
+            (IsSuccessful, ErrorMessage);
 
-        public void Represent(Tuple<bool, string> image) => 
+        public void Represent((bool, string) image) => 
             (IsSuccessful, ErrorMessage) = image;
     }
 }

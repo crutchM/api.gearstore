@@ -40,7 +40,7 @@ namespace api.gearstore.logic.Data.Repositories.Users
             return user;
         }
 
-        public IEnumerable<UserData> GetAll()
+        public IQueryable<UserData> GetAll()
         {
             return _context.Users;
         }

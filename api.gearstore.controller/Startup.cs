@@ -1,10 +1,12 @@
 using api.gearstore.logic.Data.DbContext;
 using api.gearstore.logic.Data.Repositories;
+using api.gearstore.logic.Data.Repositories.Chars;
 using api.gearstore.logic.Data.Repositories.Lots;
 using api.gearstore.logic.Data.Repositories.Sessions;
 using api.gearstore.logic.Data.Repositories.Users;
 using api.gearstore.logic.Services;
 using api.gearstore.logic.Services.Authorization;
+using api.gearstore.logic.Services.NewLot;
 using api.gearstore.logic.Services.Registration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -18,12 +20,10 @@ namespace api.gearstore.controller
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
         public IConfiguration Configuration { get; }
+
+        public Startup(IConfiguration configuration) => 
+            Configuration = configuration;
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -35,6 +35,8 @@ namespace api.gearstore.controller
             );
             services.AddScoped<IUserRepository, UserRepositoryImpl>();
             services.AddScoped<ILotsRepository, LotRepositoryImpl>();
+            services.AddScoped<ICharRepository, CharRepositoryImpl>();
+            services.AddScoped<INewLotValidator, NewLotValidatorImpl>();
             services.AddScoped<ISessionRepository, SessionRepositoryImpl>();
             services.AddScoped<IRegistrationService, RegistrationService>();
             services.AddScoped<IAuthService, AuthServiceImpl>();

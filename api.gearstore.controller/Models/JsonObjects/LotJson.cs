@@ -45,6 +45,9 @@ namespace api.gearstore.controller.Models.JsonObjects
         
         [JsonProperty("isFavorite")]
         public bool IsFavorite { get; set; }
+        
+        [JsonProperty("closed")]
+        public long? DateClosed { get; set; }
 
         public (LotData, bool) ToImage() =>
         (
@@ -56,7 +59,7 @@ namespace api.gearstore.controller.Models.JsonObjects
                     phone: Phone
                 ),
                 opened: new DateTime(DateOpened),
-                closed: null,
+                closed: DateClosed is null ? null : new DateTime(DateClosed.Value),
                 price: Price,
                 character: new CharData(
                     level: Level,
@@ -75,18 +78,19 @@ namespace api.gearstore.controller.Models.JsonObjects
         {
             var (lot, isFav) = image;
             Id = lot.Id;
-            Server = lot.Character.Server;
-            Race = lot.Character.Race;
-            Phone = lot.Owner.Phone;
-            Email = lot.Owner.Email;
-            Class = lot.Character.Class;
-            Heaven = lot.Character.Heaven;
-            Doll = lot.Character.Doll;
-            Level = lot.Character.Level;
+            Server = lot.Character?.Server;
+            Race = lot.Character?.Race;
+            Phone = lot.Owner?.Phone;
+            Email = lot.Owner?.Email;
+            Class = lot.Character?.Class;
+            Heaven = lot.Character?.Heaven;
+            Doll = lot.Character?.Doll;
+            Level = lot.Character?.Level ?? -1;
             DateOpened = lot.DateOpened.Ticks;
             Price = (int)lot.Price;
-            Description = lot.Character.Description;
+            Description = lot.Character?.Description;
             IsFavorite = isFav;
+            DateClosed = lot.DateClosed?.Ticks;
         }
     }
 }

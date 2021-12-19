@@ -28,9 +28,9 @@ namespace api.gearstore.controller.Controllers
             };
             return new JsonResult
             (
-                new AuthResultJson().WithLoadedRepresentation
+                new ActionResultJson().WithLoadedRepresentation
                 (
-                    (result == LoginResult.Success, errorMessage).ToTuple()
+                    (result == LoginResult.Success, errorMessage)
                 )
             );
         }
