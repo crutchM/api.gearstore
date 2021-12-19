@@ -1,7 +1,13 @@
-﻿namespace api.gearstore.logic.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+
+namespace api.gearstore.logic.Models
 {
     public class CharData
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
         
         public int Level { get; set; }
@@ -20,9 +26,8 @@
 
         public CharData() {}
 
-        public CharData(long id, int level, string server, string race, string @class, string heaven, string doll, string description)
+        public CharData(int level, string server, string race, string @class, string heaven, string doll, string description)
         {
-            Id = id;
             Level = level;
             Server = server;
             Race = race;

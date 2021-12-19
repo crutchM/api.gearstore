@@ -20,14 +20,12 @@ namespace api.gearstore.controller.Models.JsonObjects
         public int Level { get; set; }
 
         public LotData ToImage() =>
-            new LotData(
-                id: -1,
+            LotData.Create(
                 owner: null,
                 opened: new DateTime(0),
                 closed: null,
                 price: Price,
                 character: new CharData(
-                    id: -1,
                     level: Level,
                     server: Server,
                     race: Race,

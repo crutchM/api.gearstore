@@ -44,10 +44,8 @@ namespace api.gearstore.logic.Data.Repositories.Lots
         public LotData GetById(long id) => 
             _context.Lots.Find(id);
 
-        public IEnumerable<LotData> GetByOwnerId(long ownerId)
-        {
-            return _context.Lots.Where(x => x.Owner.Id == ownerId);
-        }
+        public IEnumerable<LotData> GetByOwnerId(long ownerId) => 
+            _context.Lots.Where(x => x.OwnerId == ownerId);
 
         public bool Update(long id)
         {

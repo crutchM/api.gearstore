@@ -48,8 +48,7 @@ namespace api.gearstore.controller.Models.JsonObjects
 
         public (LotData, bool) ToImage() =>
         (
-            new LotData(
-                id: Id,
+            LotData.Create(
                 owner: new UserData(
                     username: null,
                     password: null,
@@ -60,7 +59,6 @@ namespace api.gearstore.controller.Models.JsonObjects
                 closed: null,
                 price: Price,
                 character: new CharData(
-                    id: -1,
                     level: Level,
                     server: Server,
                     race: Race,
