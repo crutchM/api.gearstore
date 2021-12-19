@@ -10,7 +10,7 @@ namespace api.gearstore.logic.Data.Repositories.Lots
         LotData GetById(long id);
         IQueryable<LotData> GetByOwnerId(long ownerId);
         bool Create(LotData lot);
-        bool Update(long id);
+        bool Close(long id);
         LotData DeleteById(long id);
         bool Clean();
     }

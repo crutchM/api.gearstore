@@ -35,8 +35,8 @@ namespace api.gearstore.controller.Controllers
                 RegistrationResult.PhoneIsOccupied => "Номер телефона уже зарегистрирован",
                 _ => "Неизвестная ошибка"
             };
-            var jsonResult = new RegistrationResultJson();
-            jsonResult.Represent((result == RegistrationResult.Success, errorMessage).ToTuple());
+            var jsonResult = new ActionResultJson();
+            jsonResult.Represent((result == RegistrationResult.Success, errorMessage));
             return new JsonResult(jsonResult);
         }
     }

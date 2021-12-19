@@ -47,7 +47,7 @@ namespace api.gearstore.logic.Data.Repositories.Lots
         public IQueryable<LotData> GetByOwnerId(long ownerId) => 
             _context.Lots.Where(x => x.OwnerId == ownerId);
 
-        public bool Update(long id)
+        public bool Close(long id)
         {
             var oldLot = GetById(id);
             if (oldLot.IsClosed())

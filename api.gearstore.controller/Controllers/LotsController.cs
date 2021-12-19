@@ -49,5 +49,15 @@ namespace api.gearstore.controller.Controllers
                 )
             );
         }
+
+        [HttpPut]
+        public JsonResult CloseLot(long lotId)
+        {
+            var result = _lotsRepository.Close(lotId);
+            return new JsonResult(new ActionResultJson().WithLoadedRepresentation((
+                result,
+                result ? "" : "Не удалось закрыть лот"
+            )));
+        }
     }
 }
