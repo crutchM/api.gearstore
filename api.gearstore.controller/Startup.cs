@@ -38,6 +38,7 @@ namespace api.gearstore.controller
             services.AddScoped<ISessionRepository, SessionRepositoryImpl>();
             services.AddScoped<IRegistrationService, RegistrationService>();
             services.AddScoped<IAuthService, AuthServiceImpl>();
+            services.AddScoped<IFavouritesRepository, FavoutitesRepositoryImpl>();
 
             // CORS
             services.AddCors(c =>
