@@ -78,17 +78,17 @@ namespace api.gearstore.controller.Models.JsonObjects
         {
             var (lot, isFav) = image;
             Id = lot.Id;
-            Server = lot.Character.Server;
-            Race = lot.Character.Race;
-            Phone = lot.Owner.Phone;
-            Email = lot.Owner.Email;
-            Class = lot.Character.Class;
-            Heaven = lot.Character.Heaven;
-            Doll = lot.Character.Doll;
-            Level = lot.Character.Level;
+            Server = lot.Character?.Server;
+            Race = lot.Character?.Race;
+            Phone = lot.Owner?.Phone;
+            Email = lot.Owner?.Email;
+            Class = lot.Character?.Class;
+            Heaven = lot.Character?.Heaven;
+            Doll = lot.Character?.Doll;
+            Level = lot.Character?.Level ?? -1;
             DateOpened = lot.DateOpened.Ticks;
             Price = (int)lot.Price;
-            Description = lot.Character.Description;
+            Description = lot.Character?.Description;
             IsFavorite = isFav;
             DateClosed = lot.DateClosed?.Ticks;
         }

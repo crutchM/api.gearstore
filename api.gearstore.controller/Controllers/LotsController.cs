@@ -30,7 +30,7 @@ namespace api.gearstore.controller.Controllers
             var result = type switch
             {
                 "all" =>
-                    _lotsRepository.GetAll().Where(l => !l.IsClosed()),
+                    _lotsRepository.GetAll().Where(l => l.DateClosed == null),
                 "own" =>
                     _lotsRepository.GetByOwnerId(
                         _sessionRepository.GetIfExists(sessionId)?.UserId ?? -1
