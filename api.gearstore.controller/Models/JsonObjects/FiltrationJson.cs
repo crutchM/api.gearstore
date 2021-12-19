@@ -13,16 +13,16 @@ namespace api.gearstore.controller.Models.JsonObjects
         public string Race { get; set; }
         
         [JsonProperty("minLvl")]
-        public int MinLvl { get; set; }
+        public int? MinLvl { get; set; }
         
         [JsonProperty("maxLvl")]
-        public int MaxLvl { get; set; }
+        public int? MaxLvl { get; set; }
         
         [JsonProperty("minPrice")]
-        public int MinPrice { get; set; }
+        public int? MinPrice { get; set; }
         
         [JsonProperty("maxPrice")]
-        public int  MaxPrice { get; set; }
+        public int? MaxPrice { get; set; }
         
         [JsonProperty("type")]
         public string Type { get; set; }
@@ -36,10 +36,10 @@ namespace api.gearstore.controller.Models.JsonObjects
                 (
                     server: Server,
                     race: Race,
-                    minLvl: MinLvl,
-                    maxLvl: MaxLvl,
-                    minPrice: MinPrice,
-                    maxPrice: MaxPrice
+                    minLvl: MinLvl ?? -1,
+                    maxLvl: MaxLvl ?? -1,
+                    minPrice: MinPrice ?? -1,
+                    maxPrice: MaxPrice ?? -1
                 ),
                 Type,
                 SessionId

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using api.gearstore.controller.Models.JsonObjects;
 using api.gearstore.logic.Data.Repositories.Lots;
@@ -31,32 +32,32 @@ namespace api.gearstore.controller.Controllers
                 "own" =>
                     _lotRepository.GetByOwnerId(_sessionRepository.GetIfExists(json.SessionId).UserId),
                 "fav" =>
-                    new List<LotData>(), // finish after API-13,
+                    Enumerable.Empty<LotData>().AsQueryable(), // finish after API-13,
                 _ =>
-                    new List<LotData>()
+                    Enumerable.Empty<LotData>().AsQueryable()
             };
             
             return new JsonResult(Filter(result, json));
         }
 
-        private IEnumerable<LotJson> Filter(IEnumerable<LotData> lots, FiltrationJson json) =>
+        private IEnumerable<LotJson> Filter(IQueryable<LotData> lots, FiltrationJson json) =>
             lots.Where(  // by server and race
                 lot =>
-                    json.Race is null || json.Race == lot.Character.Race &&
-                    json.Server is null || lot.Character.Server == json.Server
+                    (json.Race == null || json.Race == lot.Character.Race) &&
+                    (json.Server == null || lot.Character.Server == json.Server)
             ).Where(  // by level
                 lot =>
-                    json.MinLvl == -1 || json.MinLvl <= lot.Character.Level &&
-                    json.MaxLvl == -1 || lot.Character.Level <= json.MaxLvl
+                    (json.MinLvl == null || lot.Character.Level >= json.MinLvl) &&
+                    (json.MaxLvl == null || lot.Character.Level <= json.MaxLvl)
             ).Where(  // by price
                 lot =>
-                    json.MinPrice == -1 || json.MinPrice <= lot.Price &&
-                    json.MaxPrice == -1 || lot.Price <= json.MaxPrice
+                    (json.MinPrice == null || lot.Price >= json.MinPrice) &&
+                    (json.MaxPrice == null || lot.Price <= json.MaxPrice)
             ).Select(  // transform
-                lot => new LotJson().WithLoadedRepresentation((
+                lot => new LotJson().WithLoadedRepresentation(Tuple.Create(
                     lot,
                     false  // finish after API-13
-                ))
+                ).ToValueTuple())
             );
     }
 }

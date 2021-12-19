@@ -38,13 +38,13 @@ namespace api.gearstore.logic.Data.Repositories.Lots
             return lot;
         }
 
-        public IEnumerable<LotData> GetAll() => 
+        public IQueryable<LotData> GetAll() => 
             _context.Lots;
 
         public LotData GetById(long id) => 
             _context.Lots.Find(id);
 
-        public IEnumerable<LotData> GetByOwnerId(long ownerId) => 
+        public IQueryable<LotData> GetByOwnerId(long ownerId) => 
             _context.Lots.Where(x => x.OwnerId == ownerId);
 
         public bool Update(long id)
