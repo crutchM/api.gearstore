@@ -10,7 +10,7 @@ namespace api.gearstore.logic.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
 
-        public long OwnerId { get; set; }
+        public long? OwnerId { get; set; }
         
         [ForeignKey("OwnerId")]
         public UserData Owner { get; set; }
@@ -26,7 +26,7 @@ namespace api.gearstore.logic.Models
         [ForeignKey("CharId")]
         public CharData Character { get; set; }
 
-        public LotData(long ownerId, DateTime opened, DateTime? closed, double price, long characterId)
+        public LotData(long? ownerId, DateTime opened, DateTime? closed, double price, long characterId)
         {
             OwnerId = ownerId;
             DateOpened = DateTime.Now;

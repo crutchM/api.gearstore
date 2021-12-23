@@ -6,9 +6,9 @@ namespace api.gearstore.logic.Data.Repositories.Lots
 {
     public interface ILotsRepository
     {
-        IQueryable<LotData> GetAll();
+        IEnumerable<LotData> GetAll();
         LotData GetById(long id);
-        IQueryable<LotData> GetByOwnerId(long ownerId);
+        IEnumerable<LotData> GetByOwnerId(long ownerId);
         bool Create(LotData lot);
         bool Close(long id);
         LotData DeleteById(long id);

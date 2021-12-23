@@ -13,7 +13,7 @@ using NLog;
 
 namespace api.gearstore.controller.Controllers
 {
-    [Route("api/lots/[controller]")]
+    [Route("api/lots/favs")]
     [ApiController]
     public class FavouritesController
     {

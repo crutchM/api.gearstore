@@ -37,17 +37,17 @@ namespace api.gearstore.controller.Controllers
                 "all" =>
                     _lotRepository.GetAll().Where(l => !l.IsClosed()),
                 "own" =>
-                    _lotRepository.GetByOwnerId(userId) ?? Enumerable.Empty<LotData>().AsQueryable(),
+                    _lotRepository.GetByOwnerId(userId) ?? Enumerable.Empty<LotData>(),
                 "fav" =>
-                    _favouritesRepository.GetUsersFavourites(userId) ?? Enumerable.Empty<LotData>().AsQueryable(),
+                    _favouritesRepository.GetUsersFavourites(userId) ?? Enumerable.Empty<LotData>(),
                 _ =>
-                    Enumerable.Empty<LotData>().AsQueryable()
+                    Enumerable.Empty<LotData>()
             };
             
             return new JsonResult(Filter(result, json));
         }
 
-        private IEnumerable<LotJson> Filter(IQueryable<LotData> lots, FiltrationJson json)
+        private IEnumerable<LotJson> Filter(IEnumerable<LotData> lots, FiltrationJson json)
         {
             var userId = _sessionRepository.GetIfExists(json.SessionId)?.UserId ?? -1;
             return lots.Where( // by server and race

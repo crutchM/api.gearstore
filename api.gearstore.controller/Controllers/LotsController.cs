@@ -43,7 +43,7 @@ namespace api.gearstore.controller.Controllers
                 "fav" =>
                     _favouritesRepository.GetUsersFavourites(userId) ?? Enumerable.Empty<LotData>(),
                 _ =>
-                    Enumerable.Empty<LotData>().AsQueryable()
+                    Enumerable.Empty<LotData>()
             };
             return new JsonResult(
                 result.Select(

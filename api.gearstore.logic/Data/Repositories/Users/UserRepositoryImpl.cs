@@ -10,10 +10,8 @@ namespace api.gearstore.logic.Data.Repositories.Users
     {
         private readonly AppDbContext _context;
 
-        public UserRepositoryImpl(AppDbContext context)
-        {
+        public UserRepositoryImpl(AppDbContext context) => 
             _context = context;
-        }
 
         public bool Clean()
         {
@@ -31,28 +29,22 @@ namespace api.gearstore.logic.Data.Repositories.Users
 
         public UserData DeleteById(long id)
         {
-            UserData user = GetById(id);
-            if (user is not null)
-            {
+            var user = GetById(id);
+            if (user is not null) 
                 _context.Users.Remove(user);
-            }
 
             return user;
         }
 
-        public IQueryable<UserData> GetAll()
-        {
-            return _context.Users;
-        }
+        public IEnumerable<UserData> GetAll() => 
+            _context.Users;
 
-        public UserData GetById(long id)
-        {
-            return _context.Users.Find(id);
-        }
+        public UserData GetById(long id) => 
+            _context.Users.Find(id);
 
         public void Update(UserData user)
         {
-            UserData old = GetById(user.Id);
+            var old = GetById(user.Id);
             old.CopyFrom(user);
 
             _context.Users.Update(old);

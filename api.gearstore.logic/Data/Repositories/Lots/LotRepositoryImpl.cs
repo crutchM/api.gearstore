@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using api.gearstore.logic.Data.DbContext;
 using api.gearstore.logic.Models;
 using Microsoft.EntityFrameworkCore;
@@ -36,19 +37,21 @@ namespace api.gearstore.logic.Data.Repositories.Lots
             return lot;
         }
 
-        public IQueryable<LotData> GetAll() => 
+        public IEnumerable<LotData> GetAll() => 
             _context.Lots
                 .Include(l => l.Character)
-                .Include(l => l.Owner);
+                .Include(l => l.Owner)
+                .ToList();
 
         public LotData GetById(long id) => 
             _context.Lots.Find(id);
 
-        public IQueryable<LotData> GetByOwnerId(long ownerId) => 
+        public IEnumerable<LotData> GetByOwnerId(long ownerId) => 
             _context.Lots
                 .Where(x => x.OwnerId == ownerId)
                 .Include(l => l.Character)
-                .Include(l => l.Owner);
+                .Include(l => l.Owner)
+                .ToList();
 
         public bool Close(long id)
         {

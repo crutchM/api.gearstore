@@ -8,7 +8,7 @@ namespace api.gearstore.logic.Data.Repositories.Favourites
     {
         bool IsFav(long userId, long lotId);
         
-        IQueryable<LotData> GetUsersFavourites(long userId);
+        IEnumerable<LotData> GetUsersFavourites(long userId);
 
         void Create(long lotId, long userId);
 
