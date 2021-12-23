@@ -18,6 +18,9 @@ namespace api.gearstore.controller.Models.JsonObjects
         
         [JsonProperty("lvl")]
         public int Level { get; set; }
+        
+        [JsonProperty("doll")]
+        public string Doll { get; set; }
 
         public LotData ToImage() =>
             LotData.Create(
@@ -31,7 +34,7 @@ namespace api.gearstore.controller.Models.JsonObjects
                     race: Race,
                     @class: null,
                     heaven: null,
-                    doll: null,
+                    doll: Doll,
                     description: null
                 )
             );
@@ -42,6 +45,7 @@ namespace api.gearstore.controller.Models.JsonObjects
             Level = image.Character.Level;
             Server = image.Character.Server;
             Race = image.Character.Race;
+            Doll = image.Character.Doll;
         }
     }
 }
